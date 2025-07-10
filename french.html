@@ -82,7 +82,7 @@
   <div class="sidebar">
     <button onclick="toggleSubmenu('phoneticsSubmenu')">Phonetics ▾</button>
     <div id="phoneticsSubmenu" class="submenu">
-      <a onclick="loadContent('j')">J</a>
+      <a onclick="loadContent('j-french')">J</a>
       <a href="#">U</a>
     </div>
 
@@ -107,35 +107,21 @@
       submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
     }
 
-    function loadContent(item) {
-      const content = {
-        j: `<h2>Phonetic J</h2><p>In French, the letter <strong><code>j</code></strong> is pronounced similarly to in English, but not exactly the same.</p>
-<p>The French <strong><code>j</code></strong> has the same sound as the <strong><code>s</code></strong> in English ‘vision’.</p>
-<p>In the International Phonetic Alphabet, this sound is represented <strong>/ʒ/</strong>, a ‘z’ with a tail.</p>
-
-<p>The English ‘j’ is made up of a <strong>/d/</strong>, then a <strong>/ʒ/</strong>, represented as <strong>/dʒ/</strong>.</p>
-<p>Therefore some French words which have the same sound as English ‘j’ are spelt <code>&lt;dj&gt;</code> in French:</p>
-<ul>
-  <li>Djibouti (a country in Africa)</li>
-  <li>Djenné (a town in Mali)</li>
-</ul>
-
-<p>
-  Practice saying <strong>Jack</strong> in English, followed by <strong>Jacques</strong> in French, noting the difference in the first sound.<br />
-  In the International Phonetic Alphabet, <strong>Jack</strong> is <code>/dʒak/</code> and <strong>Jacques</strong> is <code>/ʒak/</code>.
-</p>
-
-<p>Practise saying these words in French, noting how they sound different than the English equivalents:</p>
-<ul>
-  <li>Justice</li>
-  <li>Journaliste</li>
-  <li>Journal</li>
-</ul>,
-        u: `<h2>Phonetic U</h2><p>This is the content for the phonetic symbol "U".</p>`
-      };
-
-      document.getElementById('main-content').innerHTML = content[item] || '<h2>Not Found</h2>';
-    }
+function loadContent(item) {
+  fetch(`${item}.html`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Could not load ${item}.html`);
+      }
+      return response.text();
+    })
+    .then(html => {
+      document.getElementById('main-content').innerHTML = html;
+    })
+    .catch(error => {
+      document.getElementById('main-content').innerHTML = `<p>Error loading content: ${error.message}</p>`;
+    });
+}
   </script>
 </body>
 </html>
