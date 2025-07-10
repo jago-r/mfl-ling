@@ -91,7 +91,7 @@
       <a href="#">Perfect</a>
     </div>
   </div>
-  <div class="page-content">
+  <div class="page-content" id="main-content">
     <h1>Bienvenue</h1>
     <p>Ceci est la page en français.</p>
   </div>
@@ -102,11 +102,6 @@
     }
   </script>
   <script>
-    function toggleSubmenu(id) {
-      const submenu = document.getElementById(id);
-      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-    }
-
 function loadContent(item) {
   fetch(`${item}.html`)
     .then(response => {
