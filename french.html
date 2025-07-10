@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
-<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <title>Français</title>
@@ -34,7 +33,7 @@
     .sidebar button {
       background: none;
       border: none;
-      color: white;
+      color: black;
       padding: 12px 16px;
       width: 100%;
       text-align: left;
@@ -55,7 +54,7 @@
     .submenu a {
       display: block;
       padding: 6px 16px;
-      color: white;
+      color: black;
       text-decoration: none;
     }
 
@@ -66,7 +65,7 @@
     .page-content {
       margin-left: 200px;
       padding: 80px 20px 20px 20px;
-      color: white;
+      color: black;
       flex-grow: 1;
     }
   </style>
@@ -82,17 +81,16 @@
   <div class="sidebar">
     <button onclick="toggleSubmenu('phoneticsSubmenu')">La Phonétique ▾</button>
     <div id="phoneticsSubmenu" class="submenu">
-      <a onclick="loadContent('j-french')">J</a>
+      <a onclick="loadContent('j-fr')">J</a>
     </div>
 
     <button onclick="toggleSubmenu('grammarSubmenu')">La Grammatique ▾</button>
     <div id="grammarSubmenu" class="submenu">
-      <a href="#">Perfect</a>
     </div>
   </div>
   <div class="page-content" id="main-content">
     <h1>Bienvenue</h1>
-    <p>Ceci est la page en français.</p>
+    <p>Here you can find information about French linguistics.</p>
   </div>
   <script>
     function toggleSubmenu(id) {
