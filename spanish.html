@@ -1,11 +1,68 @@
 <!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
-  <title>Français</title>
+  <title>Espanol</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body {
-      background-color: #DC3545;
+      background-color: #FF9794;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #333;
+      z-index: 10;
+    }
+
+    .sidebar {
+      width: 200px;
+      background-color: rgba(0, 0, 0, 0.2);
+      padding-top: 60px; /* Space for top navbar */
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 12px 16px;
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .sidebar button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .submenu {
+      display: none;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding-left: 10px;
+    }
+
+    .submenu a {
+      display: block;
+      padding: 6px 16px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .submenu a:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .page-content {
+      margin-left: 200px;
+      padding: 80px 20px 20px 20px;
+      color: black;
+      flex-grow: 1;
     }
   </style>
 </head>
@@ -17,9 +74,42 @@
     <a href="german.html">Deutsch</a>
     <a href="welsh.html">Cymraeg</a>
   </div>
-  <div class="page-content">
-    <h1>Bienvenido</h1>
-    <p>Esta es la página en español.</p>
+  <div class="sidebar">
+    <button onclick="toggleSubmenu('phoneticsSubmenu')">La Fonética ▾</button>
+    <div id="phoneticsSubmenu" class="submenu">
+      <a onclick="loadContent('n-es')">ñ</a>
+    </div>
+
+    <button onclick="toggleSubmenu('grammarSubmenu')">La Gramática ▾</button>
+    <div id="grammarSubmenu" class="submenu">
+    </div>
   </div>
+  <div class="page-content" id="main-content">
+    <h1>Español</h1>
+    <p>Here you can find information about Spanish linguistics.</p>
+  </div>
+   <script>
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById(id);
+      submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+    }
+  </script>
+  <script>
+function loadContent(item) {
+  fetch(`${item}.html`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Could not load ${item}.html`);
+      }
+      return response.text();
+    })
+    .then(html => {
+      document.getElementById('main-content').innerHTML = html;
+    })
+    .catch(error => {
+      document.getElementById('main-content').innerHTML = `<p>Error loading content: ${error.message}</p>`;
+    });
+}
+  </script>
 </body>
 </html>
